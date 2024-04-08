@@ -1,0 +1,163 @@
+body {
+	height: 100vh;
+	width: 100vw;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	display: flex;
+	background: #010022;
+	justify-content: space-between;
+	color: #ffffff;
+	font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+* {
+	user-select: none;
+
+}
+
+#left {
+	position: relative;
+	height: 100vh;
+	width: 334px;
+	border-right: 1px solid #a1a1a1;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+#cookie {
+	width: 90%
+}
+
+#cookie:active {
+	animation: pulse .2s ease 0s 1 normal forwards;
+}
+
+#cookie-fountain {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: -1;
+}
+
+#cookie-number {
+	position: absolute;
+	font-size: 50px;
+	top: 1rem;
+}
+#cookie-frequency{
+	position: absolute;
+	font-size: 40px;
+	top: 6rem;
+}
+
+.cookie {
+	position: absolute;
+	width: 10%;
+}
+
+
+
+
+#right {
+	position: relative;
+	height: 100vh;
+	width: 334px;
+	border-left: 1px solid #a1a1a1;
+	display: flex;
+    align-items: flex-start;
+	justify-content: center;
+}
+
+.item {
+	position: relative;
+	width: 100%;
+	display: flex;
+	margin: 1rem;
+	padding: 1rem;
+	background-color: #0e0c50;
+	border-radius: 1rem;
+	border: 1px solid #a1a1a1;
+}
+
+.item-blur {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	backdrop-filter: blur(3px);
+	border-radius: 1rem;
+	background-color: #01011327;
+	cursor: not-allowed;
+}
+.item-blur.ready {
+	background-color: transparent !important;
+	backdrop-filter: blur(0) !important;
+	cursor: pointer;
+}
+
+.item-icon {
+	width: 20%;
+}
+
+.item-data {
+	display: flex;
+	flex-direction: column;
+	margin-left: 1rem;
+    justify-content: space-around;
+}
+
+.item-name {
+	font-size: 30px;
+}
+
+
+
+
+@keyframes pulse {
+	0% {
+		transform: scale(1);
+	}
+
+	25% {
+		transform: scale(0.9);
+	}
+
+	75% {
+		transform: scale(1.1);
+	}
+
+	100% {
+		transform: scale(1);
+	}
+}
+
+@keyframes vibro {
+	0% {
+		transform: translate(0);
+	}
+
+	20% {
+		transform: translate(-2px, 2px);
+	}
+
+	40% {
+		transform: translate(-2px, -2px);
+	}
+
+	60% {
+		transform: translate(2px, 2px);
+	}
+
+	80% {
+		transform: translate(2px, -2px);
+	}
+
+	100% {
+		transform: translate(0);
+	}
+}
