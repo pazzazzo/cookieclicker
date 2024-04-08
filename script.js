@@ -103,4 +103,9 @@ function cookieClick() {
     cookiesNumber++
     precCookies++
     rdmCookie()
+    if (cookiesNumber === 69) {
+        document.title = "Cookie Clicker B-)"
+    } else if (document.title === "Cookie Clicker B-)") {
+        document.title = "Cookie Clicker"
+    }
 }
