@@ -27,7 +27,9 @@ body {
 }
 
 #cookie {
-	width: 90%
+	width: 90%;
+	z-index: 2;
+	border-radius: 40%;
 }
 
 #cookie:active {
@@ -40,13 +42,15 @@ body {
 	left: 0;
 	right: 0;
 	bottom: 0;
-	z-index: -1;
 }
 
 #cookie-number {
 	position: absolute;
 	font-size: 50px;
 	top: 1rem;
+}
+.gold {
+	color: gold;
 }
 #cookie-frequency{
 	position: absolute;
@@ -56,7 +60,10 @@ body {
 
 .cookie {
 	position: absolute;
-	width: 10%;
+	width: 15%;
+}
+.cookie.gold {
+	z-index: 1;
 }
 
 

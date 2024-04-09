@@ -9,10 +9,11 @@ let cookiesImg = new Set()
 let cookiesNumber = 0
 let precCookies = 0
 let frequency = 0
+let cangold = true;
 
 setInterval(() => {
-    cookieFrequencyHTML.innerHTML = `${precCookies} cookies/s`
     frequency = precCookies
+    cookieFrequencyHTML.innerHTML = `${frequency} cookies/s`
     precCookies = 0
 }, 1000);
 
@@ -59,14 +60,41 @@ function rdm(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min)
 }
 
+function goldclick(event) {
+    event.target.remove()
+    cangold = false
+    let max = rdm(50, 150)
+    cookieFrequencyHTML.classList.add("gold")
+    cookieNumberHTML.classList.add("gold")
+    for (let i = 0; i < max; i++) {
+        setTimeout(() => {
+            cookieClick()
+            if (i === max - 1) {
+                cangold = true
+                cookieNumberHTML.classList.remove("gold")
+                cookieFrequencyHTML.classList.remove("gold")
+            }
+        }, i*60);
+    }
+}
+
 function rdmCookie() {
     let img = document.createElement("img")
-    img.src = "./media/cookie.png"
+    let isgolden = false
+    if (rdm(0, 100 + frequency*5) === 0 && cangold) {
+        img.src = "./media/gold-cookie.png"
+        img.onmousedown = goldclick
+        isgolden = true
+        img.classList.add("gold")
+    } else {
+        img.src = "./media/cookie.png"
+    }
+    img.draggable = false
     img.style.transform = `rotate(${rdm(0, 360)}deg)`
     img.classList.add("cookie")
     img.style.top = "-134px"
-    img.style.left = `${rdm(0, cookieFountainHTML.clientWidth)*0.9}px`
-    cookiesImg.add([img, 0])
+    img.style.left = `${rdm(0, cookieFountainHTML.clientWidth) * 0.85}px`
+    cookiesImg.add([img, 0, isgolden])
     cookieFountainHTML.appendChild(img)
 }
 
@@ -79,7 +107,7 @@ function anim() {
     cookieFountainSpeed = cookiesImg.size + 1
     cookieNumberHTML.innerText = cookiesNumber
     cookiesImg.forEach(cookie => {
-        cookie[1]+=cookieFountainSpeed
+        cookie[1] += (cookie[2] ? 10 : cookieFountainSpeed)
         cookie[0].style.top = `${cookie[1]}px`
         if (cookie[1] > cookieFountainHTML.clientHeight) {
             cookie[0].remove()
