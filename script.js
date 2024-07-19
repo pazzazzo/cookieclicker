@@ -10,6 +10,7 @@ let cookiesNumber = 0
 let precCookies = 0
 let frequency = 0
 let cangold = true;
+let cookiesStrenth = 1
 
 setInterval(() => {
     frequency = precCookies
@@ -18,6 +19,15 @@ setInterval(() => {
 }, 1000);
 
 let upgrades = [
+
+    {
+        "name": "+1",
+        "image": "plus1.png",
+        "cost": 20,
+        "level": 0,
+        "intervalID": 0,
+        "cost_multiplicator": 2
+    },
     {
         "name": "Curseur",
         "image": "cursor.png",
@@ -39,17 +49,21 @@ function upgradeClick(i, element) {
         cookiesNumber -= upgrade.cost
         upgrade.cost = Math.floor(upgrade.cost * upgrade.cost_multiplicator)
         element.parentElement.querySelector(".item-cost").innerHTML = upgrade.cost
+        upgrade.level++
+    } else {
+        return
     }
-    switch (i) {
-        case 0:
-            upgrade.level++
+    switch (upgrade.name) {
+        case "Curseur":
             if (upgrade.level > 1) {
                 clearInterval(upgrade.intervalID)
             }
-
             upgrade.intervalID = setInterval(() => {
                 cookieClick()
             }, 1000 / upgrade.level);
+            break;
+        case "+1":
+            cookiesStrenth++
             break;
         default:
             break;
@@ -74,14 +88,14 @@ function goldclick(event) {
                 cookieNumberHTML.classList.remove("gold")
                 cookieFrequencyHTML.classList.remove("gold")
             }
-        }, i*60);
+        }, i * 60);
     }
 }
 
 function rdmCookie() {
     let img = document.createElement("img")
     let isgolden = false
-    if (rdm(0, 100 + frequency*5) === 0 && cangold) {
+    if (rdm(0, 100 + frequency * 5) === 0 && cangold) {
         img.src = "./media/gold-cookie.png"
         img.onmousedown = goldclick
         isgolden = true
@@ -128,9 +142,11 @@ anim()
 cookieHTML.addEventListener("click", cookieClick)
 
 function cookieClick() {
-    cookiesNumber++
-    precCookies++
-    rdmCookie()
+    cookiesNumber += cookiesStrenth
+    precCookies += cookiesStrenth
+    for (let i = 0; i < cookiesStrenth; i++) {
+        rdmCookie()
+    }
     if (cookiesNumber === 69) {
         document.title = "Cookie Clicker B-)"
     } else if (document.title === "Cookie Clicker B-)") {
